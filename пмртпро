@@ -1,0 +1,16 @@
+import requests
+
+def get_github_repos(username):
+    url = f"https://api.github.com/users/{username}/repos"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        repos = response.json()
+        print(f"Публичные репозитории пользователя {username}:")
+        for repo in repos:
+            print(f"- {repo['name']} (Звезд: {repo['stargazers_count']})")
+    else:
+        print(f"Ошибка. Пользователь {username} не найден или API недоступно.")
+
+# Замени 'octocat' на любой другой никнейм
+get_github_repos("octocat")
